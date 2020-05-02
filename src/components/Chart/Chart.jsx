@@ -6,7 +6,7 @@ import React, {useState, useEffect} from 'react'
 
 
 const Chart = () =>{
-    const [dailyData, setDailyData] = useState({});     // initialize dailyData as empty object
+    const [dailyData, setDailyData] = useState([]);     // initialize dailyData as empty object
     const [hasError, setErrors] = useState(false);  
 
         let url='https://covid19.mathdro.id/api/daily';
@@ -24,12 +24,17 @@ const Chart = () =>{
               
           },[]);
           console.log("In Chart");
-          console.log(dailyData);
-
-          /*
-    
-
-      /* 
+        //  console.log(dailyData);
+          
+          const modifiedData = dailyData.map((dd)=> ({
+                confirmed: dd.confirmed.total,
+                deaths: dd.deaths.total,
+                date: dd.reportDate
+          }))
+          
+          console.log(modifiedData[0]);
+        
+          /* 
     const lineChart = (
         <Line
          data ={{
